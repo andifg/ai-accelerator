@@ -7,7 +7,6 @@ data:
   apiKey: Y2hhbmdfbWU=
 type: Opaque
 
-
 ---
 kind: Secret
 apiVersion: v1
@@ -17,7 +16,6 @@ metadata:
 data:
   tavily-search-api-key: Y2hhbmdfbWU=
 type: Opaque
-
 
 ---
 kind: Secret

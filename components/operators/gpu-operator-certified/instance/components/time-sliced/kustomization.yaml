@@ -1,11 +1,25 @@
 apiVersion: kustomize.config.k8s.io/v1alpha1
 kind: Component
 
+resources:
+  # - ../../../../../../scripts/library
+  - job.yaml
+  - rbac.yaml
+  - patch-device-plugin-config.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+configMapGenerator:
+  - name: job-aws-gpu-machineset
+    namespace: nvidia-gpu-operator
+    files:
+      - job.sh
+      - machineset-patch.yaml
 patches:
   - path: patch-gpu-cluster-policy.yaml
     target:
       kind: ClusterPolicy
-  - path: patch-device-plugin-config.yaml
+  - path: job.yaml
     target:
-      kind: ConfigMap
-      name: device-plugin-config
+      kind: Job
